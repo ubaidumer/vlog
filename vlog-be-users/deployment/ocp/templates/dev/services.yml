@@ -1,0 +1,19 @@
+#####################################################
+# Contains all services
+#####################################################
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: be-users-dev
+  namespace: vlogmakelaars-experimental
+spec:
+  selector:
+    app: vlog-be-dev
+    name: be-users-dev
+  ports:
+    - protocol: TCP
+      port: 2000
+      targetPort: 2000
+---

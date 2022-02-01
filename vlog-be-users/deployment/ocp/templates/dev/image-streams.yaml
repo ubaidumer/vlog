@@ -1,0 +1,16 @@
+#####################################################
+# Contains all ImageStreams
+#
+# Imagestream is where docker images are parked and
+#  you can refer them with the names and tags
+#####################################################
+
+---
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    application: vlog-be-dev
+  name: vlog-be-users-dev # image name you can use it with tag for example vlog-be-users-dev:latest
+  namespace: vlogmakelaars-experimental
+---

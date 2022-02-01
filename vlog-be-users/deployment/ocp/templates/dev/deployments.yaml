@@ -1,0 +1,101 @@
+###################################
+# Contains all deployments specs
+###################################
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: be-users-dev
+  annotations:
+    image.openshift.io/triggers: |-
+      [{"from":{"kind":"ImageStreamTag","name":"vlog-be-users-dev:latest","namespace":"vlogmakelaars-experimental"},"fieldPath":"spec.template.spec.containers[?(@.name==\"be-users-dev\")].image","pause":"false"}]
+  namespace: vlogmakelaars-experimental
+spec:
+  selector:
+    matchLabels:
+      app: vlog-be-dev
+      name: be-users-dev
+
+  replicas: 1
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "true" # Enabling service mesh data plane envoy/sidecar
+      labels:
+        app: vlog-be-dev
+        name: be-users-dev
+    spec:
+      containers:
+        - name: be-users-dev
+          image: 'image-registry.openshift-image-registry.svc:5000/vlogmakelaars-experimental/vlog-be-users-dev:latest'
+          ports:
+            - containerPort: 2000
+          imagePullPolicy: Always
+          command: ["node", "dist/main"]
+          env:
+            - name: MONGO_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: be-users-dev
+                  key: mongo.user
+
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: be-users-dev
+                  key: mongo.password
+
+            - name: MONGO_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: be-users-dev
+                  key: mongo.host
+
+            - name: MONGO_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: be-users-dev
+                  key: mongo.port
+
+            - name: MONGO_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: be-users-dev
+                  key: mongo.db
+
+            - name: KEYCLOAK_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: be-users-dev
+                  key: keycloak.host
+
+            - name: KEYCLOAK_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: be-users-dev
+                  key: keycloak.port
+
+            - name: KEYCLOAK_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: be-users-dev
+                  key: keycloak.client_id
+
+            - name: KEYCLOAK_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: be-users-dev
+                  key: keycloak.client_secret
+
+            - name: KEYCLOAK_REALM
+              valueFrom:
+                configMapKeyRef:
+                  name: be-users-dev
+                  key: keycloak.realm
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+---

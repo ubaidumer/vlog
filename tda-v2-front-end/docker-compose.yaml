@@ -1,0 +1,16 @@
+version: '3'
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - NEXT_PUBLIC_REACT_APP_KEYCLOAK_SECRET="4f12358d-f8c5-4774-908b-bd9c6255e099"
+      - NEXT_PUBLIC_REACT_APP_KEYCLOAK_CLIENT="admin-client"
+      - NEXT_PUBLIC_REACT_APP_OBJECT_URL="http://52.236.128.127:4000/object"
+      - NEXT_PUBLIC_REACT_APP_ADMIN_URL="http://52.236.128.127:5000/admin"
+      - NEXT_PUBLIC_REACT_APP_USERS_URL="http://52.236.128.127:2000/users"
+      - NEXT_PUBLIC_REACT_APP_APPLICATION_URL="http://52.236.128.127:3000/application"
+      - NEXT_PUBLIC_REACT_APP_INVOICE_URL="http://52.236.128.127:5001/invoices"
+    ports:
+      - 8052:8052

@@ -1,0 +1,20 @@
+export enum UserDocumentTypeEnum {
+    nationalCard = 0,
+    payslip = 1,
+    salarySlip = 2,
+    annualStatement = 3,
+    employmentStatement = 4,
+    employerStatement = 5,
+    landlordStatement = 6,
+    tenantStatement = 7,
+    chamberCommerRegistration = 8,
+    bankstatement = 9,
+    landLordLetter = 10,
+    trainingRegistration = 11,
+    financeOverview = 12,
+    sideJobSalarySlip = 13,
+    guarantorPartnershipNationalCard = 14,
+    gNationalCard = 15,
+    warant = 16,
+}
+

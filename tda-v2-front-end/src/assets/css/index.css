@@ -1,0 +1,103 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-y: scroll;
+  font-family: Lato;
+}
+
+body {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+#root {
+  height: 100%;
+}
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+}
+
+.index__reviews .swiper-pagination-bullet-active {
+  background: white !important;
+}
+
+.index__reviews .swiper-pagination-bullet {
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+}
+
+.card-review__avatar {
+  width: 100px !important;
+  height: 100px !important;
+}
+
+.index__reviews > .swiper-slide-active,
+.index__reviews > .swiper-wrapper .card-base {
+  width: 270px !important;
+}
+
+.index__reviews > .card-review__list-item-avatar {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.orange__btn {
+  background: #e9511c !important;
+  color: white !important;
+}
+
+.orange__btn:hover {
+  border: '1px solid #e9511c !important';
+  background: white !important;
+  color: #e9511c !important;
+}
+
+.learn-more-link__icon-button {
+  position: relative;
+  top: 2px;
+}
+
+@media screen and (max-width: 600px) {
+  .learn__more {
+    font-size: 12px;
+  }
+}
+
+@media screen (min-width: 375px) and (max-width: 600px) {
+  padding: 8rem 16px 3rem !important;
+}
+
+.list__dash li::marker {
+  content: '-   ';
+  font-weight: 900;
+  font-size: 17px;
+  position: relative;
+}
+
+.editorClassName {
+  border: 1px solid #f1f1f1;
+  padding: 8px;
+}

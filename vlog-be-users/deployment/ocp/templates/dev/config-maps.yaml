@@ -1,0 +1,23 @@
+########################################################################################
+# Cotains all configMaps
+# Configmaps are places where you store the config and settings required by the service
+# Make sure to provide secret config such as passwords/secretes in oc secret object
+########################################################################################
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: be-users-dev
+  namespace: vlogmakelaars-experimental
+data:
+  mongo.host: mongo-service
+  mongo.port: '27017'
+  mongo.db: admin
+
+
+  keycloak.host: localhost
+  keycloak.port: '8080'
+  keycloak.client_id: rest-client
+  keycloak.realm: demo
+---

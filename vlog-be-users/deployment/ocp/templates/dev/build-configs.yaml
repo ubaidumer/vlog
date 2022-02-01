@@ -1,0 +1,40 @@
+#########################################################
+# Contains all buildConfigs
+
+# BuidlConfig is required for building the Docker Image
+# by cloning the provided repo
+# You need to create ImageStream for the image created by
+# this buildconfig
+# Need to add webhook triggers
+#############################################################
+---
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: vlog-be-users-dev
+  namespace: vlogmakelaars-experimental
+  labels:
+    app: vlog-be-dev
+    version: v1
+spec:
+  source:
+    type: Git
+    git:
+      uri: 'git@bitbucket.org:it22bv/vlog-be-users.git'
+      ref: dev # Currently using dev branch
+    contextDir: /
+    sourceSecret:
+      name: bit-test-2 # using ssh key secret with name bit-test-2
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'vlog-be-users-dev:latest' # ImageStream where build will park the output image
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Dockerfile
+  triggers:
+    - type: ImageChange
+      imageChange: {}
+    - type: ConfigChange
+---
